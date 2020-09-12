@@ -1,0 +1,6 @@
+module Pods_SplitBizness {
+  umbrella header "Pods-SplitBizness-umbrella.h"
+
+  export *
+  module * { export * }
+}
