@@ -8,13 +8,18 @@
 
 import React from 'react';
 
-import { SafeAreaView, Text } from 'react-native';
+import {Button, ThemeProvider, Header} from 'react-native-elements';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>HOME</Text>
-    </SafeAreaView>
+    <ThemeProvider>
+      <Header
+        leftComponent={{icon: 'menu', color: '#fff'}}
+        centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
+        rightComponent={{icon: 'home', color: '#fff'}}
+      />
+      <Button title="Hey !" />
+    </ThemeProvider>
   );
 };
 
