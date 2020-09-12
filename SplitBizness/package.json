@@ -7,9 +7,12 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "cd ios && xcodebuild clean && cd .. && cd android && ./gradlew clean && cd .."
   },
   "dependencies": {
+    "@eva-design/eva": "^2.0.0",
+    "@ui-kitten/components": "^5.0.0",
     "axios": "^0.20.0",
     "core-js": "^3",
     "eslint-config-prettier": "^6.11.0",
@@ -18,7 +21,6 @@
     "react-dom": "^16.13.1",
     "react-is": "^16.13.1",
     "react-native": "0.63.2",
-    "react-native-elements": "^2.3.2",
     "react-native-qrcode-svg": "^6.0.6",
     "react-native-svg": "^9.6.4",
     "react-native-vector-icons": "^7.1.0",
@@ -39,6 +41,7 @@
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "2.1.1",
+    "react-native-clean-project": "^3.4.0",
     "react-test-renderer": "16.13.1"
   },
   "jest": {
