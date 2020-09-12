@@ -19,22 +19,23 @@ import {ApplicationProvider, Layout, Text} from '@ui-kitten/components';
  */
 import QRCode from 'react-native-qrcode-svg';
 
-var segs = [
-  { data: 'ABCDEFG', mode: 'alphanumeric' },
-  { data: '0123456', mode: 'numeric' }
-]
+let segs = {
+  token: 'secret-weapon',
+  receiver: 'resto@paypal.fr', 
+  amount: 10.5, 
+  weblink: 'http://chiliwa.me',
+}
 
-
+segs = JSON.stringify(segs)
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
     <Text category="h1">HOME</Text>
-    <QRCode value={segs} />
+    <QRCode size={300} value={segs} />
   </Layout>
 );
 
 const App = () => {
-  
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
       <HomeScreen />
