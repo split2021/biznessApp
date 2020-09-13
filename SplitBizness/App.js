@@ -12,7 +12,13 @@ import React from 'react';
  * THEMING
  */
 import * as eva from '@eva-design/eva';
-import {ApplicationProvider, Layout, Text} from '@ui-kitten/components';
+import {
+  ApplicationProvider,
+  Layout,
+  Text,
+  Input,
+  Button,
+} from '@ui-kitten/components';
 
 /**
  * QrCode
@@ -24,34 +30,103 @@ import QRCode from 'react-native-qrcode-svg';
  */
 import logo from './public/images/Logo_Split_QRCODE.png';
 
-let segs = {
-  token: 'secret-weapon',
-  receiver: 'resto@paypal.fr',
-  amount: 10.5,
-  weblink: 'http://chiliwa.me',
-  deeplink: 'fb://chiliwaa',
-};
-
-segs = JSON.stringify(segs);
-
-const HomeScreen = () => (
-  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text category="h1">PAYMENT</Text>
-    <QRCode
-      size={300}
-      value={segs}
-      logo={logo}
-      logoSize={50}
-      logoBackgroundColor="white"
-      quietZone={1}
-      logoMargin={0}
-    />
-  </Layout>
-);
 
 const App = () => {
+
+  const [bemail, setbEmail] = React.useState('');
+  const [bamount, setbAmount] = React.useState('');
+
+  const [email, setEmail] = React.useState('');
+  const [amount, setAmount] = React.useState('');
+
+  const segs = {
+    token: 'secret-weapon',
+    receiver: email,
+    amount: amount,
+    weblink: 'http://chiliwa.me',
+    deeplink: 'fb://chiliwaa',
+  };
+  
+  const updateQrcode = (resto, price) => {
+    setEmail(resto);
+    setAmount(price);
+    return true;
+  }
+  
+  const Title = () => (
+    <Layout
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        maxHeight: 200,
+      }}
+    >
+      <Text category="h1">
+        PAYMENT
+      </Text>
+    </Layout>
+  );
+  
+  const Information = () => {
+    return (
+      <Layout>
+        <Input
+          style={{marginHorizontal: 20}}
+          placeholder="Enter your Email"
+          value={bemail}
+          onChangeText={(nextvalue) => setbEmail(nextvalue)}
+          keyboardType="email-address"
+          returnKeyType="next"
+        />
+        <Layout style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Input
+            style={{marginRight: 5, marginHorizontal: 20, width: '50%'}}
+            placeholder="Amount to pay in €"
+            pla
+            value={bamount}
+            onChangeText={(nextvalue) => setbAmount(nextvalue)}
+            keyboardType="numeric"
+            returnKeyType="done"
+            textAlign="left"
+          />
+          <Text>EUR</Text>
+        </Layout>
+      </Layout>
+    );
+  };
+  
+  const GenerateQrCode = () => {
+    return (
+      <Layout
+        style={{flex: 0.25, justifyContent: 'center', alignItems: 'center'}}
+      >
+        <Button onPress={() => {updateQrcode(bemail, bamount); console.log(segs)}}>
+          Generate QrCode
+        </Button>
+      </Layout>
+    );
+  };
+  
+  const HomeScreen = () => (
+    <Layout style={{flex: 0.5, justifyContent: 'center', alignItems: 'center'}}>
+      <QRCode
+        size={300}
+        value={JSON.stringify(segs)}
+        logo={logo}
+        logoSize={50}
+        logoBackgroundColor="white"
+        quietZone={1}
+        logoMargin={0}
+      />
+    </Layout>
+  );
+
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
+      <Title />
+      <Information />
+      <GenerateQrCode />
       <HomeScreen />
     </ApplicationProvider>
   );
