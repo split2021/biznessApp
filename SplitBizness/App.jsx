@@ -9,6 +9,12 @@
 import React from 'react';
 
 /**
+ *  NAVIGATION
+ */ 
+import { NavigationContainer } from '@react-navigation/native';
+import RootStack from './navigators/AppStackNav';
+
+/**
  * THEMING
  */
 import * as eva from '@eva-design/eva';
@@ -59,7 +65,8 @@ const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         maxHeight: 200,
-      }}>
+      }}
+    >
       <Text category="h1">PAYMENT</Text>
     </Layout>
   );
@@ -93,12 +100,13 @@ const App = () => {
   const GenerateQrCode = () => {
     return (
       <Layout
-        style={{flex: 0.25, justifyContent: 'center', alignItems: 'center'}}>
+        style={{flex: 0.25, justifyContent: 'center', alignItems: 'center'}}
+      >
         <Button
           onPress={() => {
             updateQrcode(bemail, bamount);
-            console.log(segs);
-          }}>
+          }}
+        >
           Generate QrCode
         </Button>
       </Layout>
@@ -120,12 +128,15 @@ const App = () => {
   );
 
   return (
-    <ApplicationProvider {...eva} theme={eva.light} >
-      <Title />
-      <Information />
-      <GenerateQrCode />
-      <HomeScreen />
-    </ApplicationProvider>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
+    // <ApplicationProvider {...eva} theme={eva.light}>
+    //   <Title />
+    //   <Information />
+    //   <GenerateQrCode />
+    //   <HomeScreen />
+    // </ApplicationProvider>
   );
 };
 
