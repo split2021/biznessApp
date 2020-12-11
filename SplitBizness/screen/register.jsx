@@ -48,13 +48,13 @@ const Register = ({navigation}) => {
           navigation.dispatch(StackActions.replace('Login', {}));
         }}
       >
-        <Text style={{color: 'yellow'}}>here</Text>
+        <Text style={{color: 'red'}}>here</Text>
       </TouchableOpacity>
     </Layout>
   );
 
   return (
-    <ApplicationProvider {...eva} theme={eva.dark}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <Layout style={{flex: 1}}>
         <Title />
         <Layout>
@@ -131,7 +131,7 @@ const Register = ({navigation}) => {
               );
               if (is_register) {
                 navigation.dispatch(
-                  StackActions.replace('Home', {R_user:login, R_pwd:password}),
+                  StackActions.replace('Home', {login:login}),
                 );
               } else {
                 Alert.alert('Error', 'An Error Occured');

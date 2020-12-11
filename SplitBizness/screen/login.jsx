@@ -12,25 +12,29 @@ import {
   Button,
 } from '@ui-kitten/components';
 import {TouchableOpacity, Alert} from 'react-native';
-
+import logo from '../public/images/Logo_Split_QRCODE.png';
 import {StackActions} from '@react-navigation/native';
 import {getToken} from '../axios/axios';
+import {Image} from 'react-native'
 
 const Login = ({navigation}) => {
 
-  const [login, setLogin] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [login, setLogin] = React.useState('hugo@martin.com');
+  const [password, setPassword] = React.useState('cacacaca');
 
   const Title = () => (
     <Layout
       style={{
-        flex: 1,
+        flex: 0.5,
         justifyContent: 'center',
         alignItems: 'center',
-        maxHeight: 200,
+        //maxHeight: 200,
       }}
     >
-      <Text category="h1">Login</Text>
+      <Image
+      style={{width:200, height:200}}
+      source={logo}
+      />
     </Layout>
   );
 
@@ -44,13 +48,13 @@ const Login = ({navigation}) => {
           navigation.dispatch(StackActions.replace('Register', {}));
         }}
       >
-        <Text style={{color: 'yellow'}}>here</Text>
+        <Text style={{color: 'red'}}>here</Text>
       </TouchableOpacity>
     </Layout>
   );
 
   return (
-    <ApplicationProvider {...eva} theme={eva.dark}>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <Layout style={{flex: 1}}>
         <Title />
         <Layout>
@@ -76,10 +80,10 @@ const Login = ({navigation}) => {
           <Button
             style={{marginHorizontal: 20, marginTop: 50}}
             onPress={async () => {
-              const token = await getToken(login, password);
-              if (token) {
+              const res = await getToken(login, password);
+              if (res.token) {
                 navigation.dispatch(
-                  StackActions.replace('Home', {login:login}),
+                  StackActions.replace('Home', {login:login, userid:res.id}),
                 );
               } else {
                 Alert.alert('Error', 'An Error Occured');
